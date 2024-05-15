@@ -1,26 +1,32 @@
-import { useState } from 'react';
-import './App.css';
-import Header from './components/header/Header';
-import Sidebar from './components/sidebar/Sidebar';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Layout';
 import Home from './pages/home/Home';
+import Records from './pages/records/Records';
+import Login from './pages/login/Login';
 
-function App() {
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
-
-  const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle);
-  };
-
-  return (
-    <div className="grid-container">
-      <Header OpenSidebar={OpenSidebar} />
-      <Sidebar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
-      />
-      <Home />
-    </div>
-  );
-}
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/records',
+          element: <Records />,
+        },
+      ],
+    },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+  ]);
+  return <RouterProvider router={router} />;
+};
 
 export default App;
