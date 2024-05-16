@@ -1,0 +1,7 @@
+.records {
+  grid-area: main;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+  padding-bottom: 5%;
+}

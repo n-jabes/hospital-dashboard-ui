@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   background-color: #1d2634;
   /* color: #9e9ea4; */
+  overflow: hidden;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -101,6 +102,12 @@ body {
   width: 70%;
   border-radius: 20px;
   padding: 10px 20px;
+}
+
+.sidebar-list .active,
+.sidebar-list .active > a {
+  background-color: #d9dfef;
+  color: black;
 }
 
 .sidebar-list-item:hover {

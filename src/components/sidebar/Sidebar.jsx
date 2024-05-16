@@ -1,19 +1,15 @@
-import React from 'react';
-import {
-  BsCart3,
-  BsGrid1X2Fill,
-  BsFillArchiveFill,
-  BsFillGrid3X3GapFill,
-  BsPeopleFill,
-  BsListCheck,
-  BsMenuButtonWideFill,
-  BsFillGearFill,
-} from 'react-icons/bs';
+import React, { useState } from 'react';
 import { RxDashboard } from 'react-icons/rx';
 import { LiaClipboardListSolid } from 'react-icons/lia';
 import { TbLogout } from 'react-icons/tb';
+import { BsPeopleFill } from "react-icons/bs";
+import { useLocation } from 'react-router-dom';
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
+  const location = useLocation();
+  const [tab, setTab] = useState(location.pathname);
+  console.log(tab);
+
   return (
     <aside
       id="sidebar"
@@ -29,18 +25,23 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
       </div>
 
       <ul className="sidebar-list">
-        <li className="sidebar-list-item">
-          <a href="">
-            <RxDashboard className="icon" /> <span>Dashboard</span> 
+        <li className={`sidebar-list-item ${tab === '/' ? 'active' : ''}`}>
+          <a href="/">
+            <RxDashboard className="icon"/> <span>Dashboard</span> 
           </a>
         </li>
-        <li className="sidebar-list-item">
-          <a href="">
+        <li className={`sidebar-list-item ${tab === '/records' ? 'active' : ''}`}>
+          <a href="/records" >
             <LiaClipboardListSolid className="icon" /> <span>Records</span> 
           </a>
         </li>
+        <li className={`sidebar-list-item ${tab === '/patients' ? 'active' : ''}`}>
+          <a href="/patients" >
+            <BsPeopleFill className="icon" /> <span>Patients</span> 
+          </a>
+        </li>
         <li className="sidebar-list-item">
-          <a href="">
+          <a href="/login">
             <TbLogout className="icon" /> <span>Logout</span> 
           </a>
         </li>

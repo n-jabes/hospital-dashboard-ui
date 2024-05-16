@@ -1,0 +1,10 @@
+.action {
+  padding: 7px 10px;
+  background: #324da6;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  width: 100%;
+}

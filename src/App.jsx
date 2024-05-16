@@ -4,6 +4,7 @@ import Layout from './Layout';
 import Home from './pages/home/Home';
 import Records from './pages/records/Records';
 import Login from './pages/login/Login';
+import Patients from './pages/patients/Patients';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const App = () => {
         {
           path: '/records',
           element: <Records />,
+        },
+        {
+          path: '/patients',
+          element: <Patients />,
         },
       ],
     },
