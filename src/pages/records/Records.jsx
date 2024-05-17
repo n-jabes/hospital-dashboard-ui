@@ -187,13 +187,16 @@ const Records = () => {
             head: {
               padding: '5px',
               color: '#80889C',
+              fontFamily: 'Poppins, sans-serif',
             },
             body: {
               padding: '5px',
               textAlign: 'center',
+              fontFamily: 'Poppins, sans-serif',
             },
             footer: {
               padding: '5px',
+              fontFamily: 'Poppins, sans-serif',
             },
           },
         },
