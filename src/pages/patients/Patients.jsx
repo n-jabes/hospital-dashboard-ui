@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
 import './patients.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import Pusher from 'pusher-js';
+
+const baseURL = 'https://innovahyperbackend.onrender.com';
 
 const Patients = () => {
   const [showForm, setShowForm] = useState(false);
+  const [patients, setPatients] = useState([]);
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const response = await axios.get(baseURL + '/medicalRecords/patients');
+        if (response.status === 200) {
+          setPatients(response.data.data);
+        } else {
+          console.error('No patients found or error in fetching data');
+        }
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      }
+    };
+
+    fetchPatients();
+  }, []);
+
+  console.log(patients);
+
   const columns = ['#', 'Names', 'Card No.', 'Location'];
 
-  const data = [
-    [1, 'Esther Umuhoza ', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-    [1, 'Esther Umuhoza', 'C3 D3 C3', 'Musanze'],
-  ];
+  const data = patients.map((patient, index) => [
+    index + 1,
+    patient.fullName,
+    patient.cardId,
+    patient.email,
+  ]);
+
 
   const options = {
     filterType: 'checkbox',
@@ -67,22 +85,22 @@ const Patients = () => {
           <form action="#">
             <div className="item">
               <label htmlFor="name">Name</label>
-              <input type="text" placeholder="Enter patient Full Names" />
+              <input type="text" placeholder="Enter patient Full Names" required/>
             </div>
 
             <div className="item">
               <label htmlFor="email">Email</label>
-              <input type="email" placeholder="Enter patient Email" />
+              <input type="email" placeholder="Enter patient Email" required/>
             </div>
 
             <div className="item">
               <label htmlFor="password">Password</label>
-              <input type="password" placeholder="Enter patient Password" />
+              <input type="password" placeholder="Enter patient Password" required/>
             </div>
 
             <div className="item">
               <label htmlFor="cardId">Card Id</label>
-              <input type="text" placeholder="Enter patient Card Id" />
+              <input type="text" placeholder="Enter patient Card Id" required/>
             </div>
             <button>Submit</button>
           </form>

@@ -20,7 +20,8 @@ img {
 
 .formContainer {
   width: 40%;
-  height: 40%;
+  min-height: 40%;
+  height: max-content;
   background: white;
   border-radius: 10px;
   padding: 15px;
@@ -40,6 +41,12 @@ form {
   align-items: center;
   gap: 20px;
   width: 100%;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 input {
@@ -68,7 +75,20 @@ input {
   text-align: center;
 }
 
+.button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 Link,
 a {
   text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .formContainer {
+    width: 80%;
+    padding-bottom: 50px;
+    height: max-content;
+  }
 }

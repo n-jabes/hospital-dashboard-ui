@@ -9,25 +9,25 @@ import Patients from './pages/patients/Patients';
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: '/dashboard',
       element: <Layout />,
       children: [
         {
-          path: '/',
+          path: '/dashboard/home',
           element: <Home />,
         },
         {
-          path: '/records',
+          path: '/dashboard/records',
           element: <Records />,
         },
         {
-          path: '/patients',
+          path: '/dashboard/patients',
           element: <Patients />,
         },
       ],
     },
     {
-      path: '/login',
+      path: '/',
       element: <Login />,
     },
   ]);
