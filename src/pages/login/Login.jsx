@@ -40,7 +40,7 @@ const Login = () => {
       
 
       // Check the user's role and navigate accordingly
-      if (user.role === 'doctor') {
+      if (user.role == 'doctor') {
         navigate('/dashboard/home');
       } else {
         console.log('you are not a doctor');
