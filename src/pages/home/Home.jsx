@@ -1,61 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
-  BarChart,
-  Bar,
-  Cell,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
-  LineChart,
-  Line,
 } from 'recharts';
 
+const baseURL = 'https://innovahyperbackend.onrender.com';
+
 function Home() {
-  const data = [
-    {
-      hours: 0,
-      patients: 10,
-    },
-    {
-      hours: 1,
-      patients: 20,
-    },
-    {
-      hours: 2,
-      patients: 30,
-    },
-    {
-      hours: 3,
-      patients: 40,
-    },
-    {
-      hours: 4,
-      patients: 50,
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [cardsData, setCardsData] = useState({
+    screenedPeople: 0,
+    averageHeartBeat: 0,
+    averageWeight: 0,
+    averageTemperature: 0,
+  });
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch data for the chart
+        const chartResponse = await axios.get(`${baseURL}/medicalRecords/total-patients-by-hour`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        console.log(chartResponse.data.data)
+        const chartData = chartResponse.data.data.map(item => ({
+          hours: item.hour,
+          patients: item.totalPatients,
+        }));
+        setData(chartData);
+
+        // Fetch data for the cards
+        const cardsResponse = await axios.get(`${baseURL}/medicalRecords/average-medical-data`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        console.log(cardsResponse.data)
+        const { averageHeartBeat, averageWeight, averageTemperature } = cardsResponse.data;
+        setCardsData({
+          screenedPeople: chartResponse.data.data.reduce((sum, item) => sum + item.totalPatients, 0), // Sum of total patients
+          averageHeartBeat,
+          averageWeight,
+          averageTemperature,
+        });
+
+      } catch (error) {
+        console.log('Failed to fetch data');
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <main className="main-container">
       <div className="main-cards">
         <div className="card">
           <p className="title">Screened people today</p>
-          <h1>305</h1>
+          <h1>{cardsData.screenedPeople}</h1>
         </div>
         <div className="card">
           <p className="title">Average Heart beat</p>
-          <h1>98.3hm/hr</h1>
+          <h1>{cardsData.averageHeartBeat} hm/hr</h1>
         </div>
         <div className="card">
           <p className="title">Average Weight</p>
-          <h1>65 kg</h1>
+          <h1>{cardsData.averageWeight} kg</h1>
         </div>
         <div className="card">
           <p className="title">Average Temperature</p>
           <h1>
-            37.5 <sup>o</sup>C
+            {cardsData.averageTemperature} <sup>o</sup>C
           </h1>
         </div>
       </div>
@@ -74,7 +99,7 @@ function Home() {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis />
+            <XAxis dataKey="hours" />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -84,10 +109,10 @@ function Home() {
               stroke="#A6CEE3"
               activeDot={{ r: 8 }}
             />
-            <Line type="monotone" dataKey="hours" stroke="#82ca9d" />
           </LineChart>
         </ResponsiveContainer>
       </div>
+      {error && <p className="error">{error}</p>}
     </main>
   );
 }

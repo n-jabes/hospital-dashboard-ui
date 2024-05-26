@@ -3,12 +3,20 @@ import { RxDashboard } from 'react-icons/rx';
 import { LiaClipboardListSolid } from 'react-icons/lia';
 import { TbLogout } from 'react-icons/tb';
 import { BsPeopleFill } from 'react-icons/bs';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   const location = useLocation();
   const [tab, setTab] = useState(location.pathname);
-  console.log(tab);
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
+
+    navigate('/');
+  }
 
   return (
     <aside
@@ -50,8 +58,8 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
             <BsPeopleFill className="icon" /> <span>Patients</span>
           </a>
         </li>
-        <li className="sidebar-list-item">
-          <a href="/">
+        <li className="sidebar-list-item" onClick={handleLogout}>
+          <a href="#">
             <TbLogout className="icon" /> <span>Logout</span>
           </a>
         </li>

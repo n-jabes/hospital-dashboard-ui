@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 function Layout() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const navigate = useNavigate();
+
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
+
 
   return (
     <div className="grid-container">

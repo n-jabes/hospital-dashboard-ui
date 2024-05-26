@@ -5,3 +5,11 @@
   overflow-y: auto;
   padding-bottom: 5%;
 }
+
+.loading {
+  grid-area: main;
+  background: white;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}

@@ -4,15 +4,23 @@ import './patients.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import Pusher from 'pusher-js';
+import io from 'socket.io-client';
 
 const baseURL = 'https://innovahyperbackend.onrender.com';
 
 const Patients = () => {
   const [showForm, setShowForm] = useState(false);
   const [patients, setPatients] = useState([]);
+  const [email, setEmail] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [cardId, setCardId] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(baseURL + '/medicalRecords/patients');
         if (response.status === 200) {
@@ -22,13 +30,27 @@ const Patients = () => {
         }
       } catch (error) {
         console.error('Error fetching patients:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPatients();
-  }, []);
 
-  console.log(patients);
+    // Connect to the Socket.IO server
+    // const socket = io(baseURL);
+    // console.log('connected to socket', socket)
+
+    // // Listen for 'new-patient' events
+    // socket.on('patients', (data) => {
+    //   setPatients((prevPatients) => [...prevPatients, data.newUser]);
+    // });
+
+    // // Cleanup on component unmount
+    // return () => {
+    //   socket.disconnect();
+    // };
+  }, []);
 
   const columns = ['#', 'Names', 'Card No.', 'Location'];
 
@@ -38,7 +60,6 @@ const Patients = () => {
     patient.cardId,
     patient.email,
   ]);
-
 
   const options = {
     filterType: 'checkbox',
@@ -74,6 +95,46 @@ const Patients = () => {
       },
     });
 
+  const handleCreateNewUser = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      console.log(token)
+      const response = await axios.post(baseURL + '/medicalRecords/patients', {
+        fullName,
+        email,
+        password,
+        cardId,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response);
+      setError(response.data.message);
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setShowForm(false)
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setError('');
+  };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleFullNameChange = (e) => {
+    setFullName(e.target.value);
+  };
+  const handleCardIdChange = (e) => {
+    setCardId(e.target.value);
+    setError('');
+  };
+
   return (
     <div className="patients">
       {showForm && (
@@ -82,27 +143,51 @@ const Patients = () => {
             x
           </button>
           <h1 className="title">New Patient</h1>
-          <form action="#">
+          <form action="#" onSubmit={handleCreateNewUser}>
             <div className="item">
-              <label htmlFor="name">Name</label>
-              <input type="text" placeholder="Enter patient Full Names" required/>
+              <label htmlFor="fullName">Name</label>
+              <input
+                type="text"
+                placeholder="Enter patient Full Names"
+                name="fullName"
+                onChange={handleFullNameChange}
+                required
+              />
             </div>
 
             <div className="item">
               <label htmlFor="email">Email</label>
-              <input type="email" placeholder="Enter patient Email" required/>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter patient Email"
+                onChange={handleEmailChange}
+                required
+              />
             </div>
 
             <div className="item">
               <label htmlFor="password">Password</label>
-              <input type="password" placeholder="Enter patient Password" required/>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter patient Password"
+                onChange={handlePasswordChange}
+                required
+              />
             </div>
 
             <div className="item">
               <label htmlFor="cardId">Card Id</label>
-              <input type="text" placeholder="Enter patient Card Id" required/>
+              <input
+                type="text"
+                name="cardId"
+                placeholder="Enter patient Card Id"
+                onChange={handleCardIdChange}
+                required
+              />
             </div>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
           </form>
         </div>
       )}
@@ -111,14 +196,18 @@ const Patients = () => {
           + New user
         </button>
       </div>
-      <ThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable
-          title={'Patients'}
-          data={data}
-          columns={columns}
-          options={options}
-        />
-      </ThemeProvider>
+      {loading ? (
+        <h2 className="loading">Loading . . .</h2>
+      ) : (
+        <ThemeProvider theme={getMuiTheme()}>
+          <MUIDataTable
+            title={'Patients'}
+            data={data}
+            columns={columns}
+            options={options}
+          />
+        </ThemeProvider>
+      )}
     </div>
   );
 };

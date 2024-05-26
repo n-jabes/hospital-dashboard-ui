@@ -37,13 +37,14 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('role', user.role);
 
+      
+
       // Check the user's role and navigate accordingly
       if (user.role === 'doctor') {
-        console.log('is doc');
         navigate('/dashboard/home');
       } else {
         console.log('you are not a doctor');
-        // navigate('/login'); // or another page for patients
+        navigate('/'); // or another page for patients
       }
     } catch (error) {
       setError(error.response ? error.response.data.error : 'Login failed');

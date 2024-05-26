@@ -85,7 +85,16 @@ form button {
   border-radius: 20px;
   cursor: pointer;
   text-align: center;
-  width: 20%;
+  min-width: 20%;
+  width: max-content;
   border: none;
   font-family: 'poppins';
+}
+
+.loading {
+  grid-area: main;
+  background: white;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 500;
 }
