@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+// import {
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+//   ResponsiveContainer,
+// } from 'recharts';
 
-// import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 const baseURL = 'https://innovahyperbackend.onrender.com';
 
@@ -107,8 +107,10 @@ function Home() {
       </div>
 
       <div className="charts">
-      <ResponsiveContainer width="100%" height='100%'>
+        {/* <ResponsiveContainer width="100%" height="100%">
           <LineChart
+            width={500}
+            height={200}
             data={data}
             margin={{
               top: 5,
@@ -128,18 +130,21 @@ function Home() {
               stroke="#A6CEE3"
               activeDot={{ r: 8 }}
             />
+            <Line type="monotone" dataKey="hours" stroke="#82ca9d" />
           </LineChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer> */}
 
-        {/* <LineChart
-          width={1000}
-          height={350}
-          series={[
-            { data: chartPatients, label: 'patients' },
-            { data: chartHours, label: 'hour' },
-          ]}
-          xAxis={[{ scaleType: 'point', data: chartHours }]}
-        /> */}
+        <div className="chartContainer">
+          <LineChart
+            width={950}
+            height={300}
+            series={[
+              { data: chartPatients, label: 'patients' },
+              { data: chartHours, label: 'hours' },
+            ]}
+            xAxis={[{ scaleType: 'point', data: chartHours }]}
+          />
+        </div>
       </div>
       {error && <p className="error">{error}</p>}
     </main>
