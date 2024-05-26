@@ -37,19 +37,7 @@ const Patients = () => {
 
     fetchPatients();
 
-    // Connect to the Socket.IO server
-    // const socket = io(baseURL);
-    // console.log('connected to socket', socket)
-
-    // // Listen for 'new-patient' events
-    // socket.on('patients', (data) => {
-    //   setPatients((prevPatients) => [...prevPatients, data.newUser]);
-    // });
-
-    // // Cleanup on component unmount
-    // return () => {
-    //   socket.disconnect();
-    // };
+    
   }, []);
 
   const columns = ['#', 'Names', 'Card No.', 'Location'];

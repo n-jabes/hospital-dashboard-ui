@@ -78,7 +78,7 @@ const Records = () => {
     filterType: 'checkbox',
     elevation: 0,
     selectableRows: false,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
     rowsPerPageOptions: [5, 10, 15, 20],
     rowHover: false,
     responsive: 'none',
