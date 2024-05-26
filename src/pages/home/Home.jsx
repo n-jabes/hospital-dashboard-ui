@@ -11,6 +11,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+// import { LineChart } from '@mui/x-charts/LineChart';
+
 const baseURL = 'https://innovahyperbackend.onrender.com';
 
 function Home() {
@@ -22,6 +24,8 @@ function Home() {
     averageTemperature: 0,
   });
   const [error, setError] = useState('');
+  const [chartPatients, setChartPatients] = useState([]);
+  const [chartHours, setChartHours] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +45,14 @@ function Home() {
           patients: item.totalPatients,
         }));
         setData(chartData);
+        console.log(chartData);
+
+        // Extract uData and pData from chartData
+        setChartHours(chartData.map((item) => item.hours));
+        setChartPatients(chartData.map((item) => item.patients));
+
+        console.log('uData:', chartHours);
+        console.log('pData:', chartPatients);
 
         // Fetch data for the cards
         const cardsResponse = await axios.get(
@@ -52,14 +64,14 @@ function Home() {
           }
         );
         console.log(cardsResponse.data);
-        const { averageHeartBeat, averageWeight, averageTemperature } =
+        const { averageBloodPressure, averageWeight, averageTemperature } =
           cardsResponse.data;
         setCardsData({
           screenedPeople: chartResponse.data.data.reduce(
             (sum, item) => sum + item.totalPatients,
             0
           ), // Sum of total patients
-          averageHeartBeat,
+          averageBloodPressure,
           averageWeight,
           averageTemperature,
         });
@@ -79,8 +91,8 @@ function Home() {
           <h1>{cardsData.screenedPeople}</h1>
         </div>
         <div className="card">
-          <p className="title">Average Heart beat</p>
-          <h1>{cardsData.averageHeartBeat} hm/hr</h1>
+          <p className="title">Average Blood Pressure</p>
+          <h1>{cardsData.averageBloodPressure} hm/hr</h1>
         </div>
         <div className="card">
           <p className="title">Average Weight</p>
@@ -95,10 +107,8 @@ function Home() {
       </div>
 
       <div className="charts">
-        <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height='100%'>
           <LineChart
-            width={500}
-            height={200}
             data={data}
             margin={{
               top: 5,
@@ -118,9 +128,18 @@ function Home() {
               stroke="#A6CEE3"
               activeDot={{ r: 8 }}
             />
-            <Line type="monotone" dataKey="hours" stroke="#82ca9d" />
           </LineChart>
         </ResponsiveContainer>
+
+        {/* <LineChart
+          width={1000}
+          height={350}
+          series={[
+            { data: chartPatients, label: 'patients' },
+            { data: chartHours, label: 'hour' },
+          ]}
+          xAxis={[{ scaleType: 'point', data: chartHours }]}
+        /> */}
       </div>
       {error && <p className="error">{error}</p>}
     </main>

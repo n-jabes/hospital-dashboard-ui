@@ -7,6 +7,7 @@ import Records from './pages/records/Records';
 import Login from './pages/login/Login';
 import Patients from './pages/patients/Patients';
 import ProtectedRoute from './ProtectedRoute';
+import PublicRoute from './PublicRoute';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Login />,
+    element: <PublicRoute element={<Login />} />,
   },
 ]);
 
