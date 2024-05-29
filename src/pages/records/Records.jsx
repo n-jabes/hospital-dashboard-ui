@@ -41,7 +41,8 @@ const Records = () => {
     'Temperature',
     'Weight',
     'Height',
-    'Heart beat',
+    'Heart Beat',
+    'Oxygen Level',
     'Action',
   ];
 
@@ -56,7 +57,8 @@ const Records = () => {
         record.temperature,
         record.weight,
         record.height,
-        record.heartBeat,
+        record.bloodPressure,
+        record.oxygen,
         <Action text="send message" />,
       ])
     : [];
