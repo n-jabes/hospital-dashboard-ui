@@ -50,9 +50,11 @@ const Records = () => {
 
   // Use the fetched data to construct the data array
   const data = medicalRecords
-    ? medicalRecords.map((record, index) => [
+    ? medicalRecords.map((record, index) =>
+
+      [
         index + 1,
-        record.fullName,
+        record.user?.email ?? '',
         record.cardId,
         record.temperature,
         record.weight,
