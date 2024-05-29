@@ -92,16 +92,16 @@ function Home() {
         </div>
         <div className="card">
           <p className="title">Average Blood Pressure</p>
-          <h1>{cardsData.averageBloodPressure} hm/hr</h1>
+          <h1>{(cardsData.averageBloodPressure ?? 0).toFixed(2)}</h1>
         </div>
         <div className="card">
           <p className="title">Average Weight</p>
-          <h1>{cardsData.averageWeight} kg</h1>
+          <h1>{(cardsData.averageWeight ?? 0).toFixed(2)} kg</h1>
         </div>
         <div className="card">
           <p className="title">Average Temperature</p>
           <h1>
-            {cardsData.averageTemperature} <sup>o</sup>C
+          {(cardsData.averageTemperature ?? 0).toFixed(2)}<sup>o</sup>C
           </h1>
         </div>
       </div>

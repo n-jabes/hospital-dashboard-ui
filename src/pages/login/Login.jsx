@@ -57,7 +57,7 @@ const Login = () => {
     <div className="login">
       <img src="./doc-bg.png" alt="Background" />
       <div className="formContainer">
-        <h1 className="title">My Doctor</h1>
+        <h1 className="title">VSR Robot</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
