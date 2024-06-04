@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import MUIDataTable from 'mui-datatables';
-import './patients.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
-import Pusher from 'pusher-js';
-import io from 'socket.io-client';
+import React, { useEffect, useState } from "react";
+import MUIDataTable from "mui-datatables";
+import "./patients.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import Pusher from "pusher-js";
+import io from "socket.io-client";
 
-const baseURL = 'https://innovahyperbackend.onrender.com';
+const baseURL = "https://innovahyperbackend.onrender.com";
 
 const Patients = () => {
   const [showForm, setShowForm] = useState(false);
   const [patients, setPatients] = useState([]);
-  const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [cardId, setCardId] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [cardId, setCardId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(baseURL + '/medicalRecords/patients');
+        const response = await axios.get(baseURL + "/medicalRecords/patients");
         if (response.status === 200) {
           setPatients(response.data.data);
         } else {
-          console.error('No patients found or error in fetching data');
+          console.error("No patients found or error in fetching data");
         }
       } catch (error) {
-        console.error('Error fetching patients:', error);
+        console.error("Error fetching patients:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPatients();
-
-    
   }, []);
 
-  const columns = ['#', 'Names', 'Card No.', 'Location'];
+  const columns = ["#", "Names", "Card No.", "Email"];
 
   const data = patients.map((patient, index) => [
     index + 1,
@@ -50,13 +48,13 @@ const Patients = () => {
   ]);
 
   const options = {
-    filterType: 'checkbox',
+    filterType: "checkbox",
     elevation: 0,
     selectableRows: false,
     rowsPerPage: 5,
     rowsPerPageOptions: [5, 10, 15, 20],
     rowHover: false,
-    responsive: 'none',
+    responsive: "none",
   };
 
   const getMuiTheme = () =>
@@ -65,18 +63,18 @@ const Patients = () => {
         MuiTableCell: {
           styleOverrides: {
             head: {
-              padding: '5px',
-              color: '#80889C',
-              fontFamily: 'Poppins, sans-serif',
+              padding: "5px",
+              color: "#80889C",
+              fontFamily: "Poppins, sans-serif",
             },
             body: {
-              padding: '10px 5px 10px 20px',
-              textAlign: 'left',
-              fontFamily: 'Poppins, sans-serif',
+              padding: "10px 5px 10px 20px",
+              textAlign: "left",
+              fontFamily: "Poppins, sans-serif",
             },
             footer: {
-              padding: '5px ',
-              fontFamily: 'Poppins, sans-serif',
+              padding: "5px ",
+              fontFamily: "Poppins, sans-serif",
             },
           },
         },
@@ -86,31 +84,35 @@ const Patients = () => {
   const handleCreateNewUser = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      console.log(token)
-      const response = await axios.post(baseURL + '/medicalRecords/patients', {
-        fullName,
-        email,
-        password,
-        cardId,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const token = localStorage.getItem("token");
+      console.log(token);
+      const response = await axios.post(
+        baseURL + "/medicalRecords/patients",
+        {
+          fullName,
+          email,
+          password,
+          cardId,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log(response);
       setError(response.data.message);
     } catch (error) {
       console.log(error);
-    }finally{
-      setShowForm(false)
+    } finally {
+      setShowForm(false);
     }
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    setError('');
+    setError("");
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -120,7 +122,7 @@ const Patients = () => {
   };
   const handleCardIdChange = (e) => {
     setCardId(e.target.value);
-    setError('');
+    setError("");
   };
 
   return (
@@ -189,7 +191,7 @@ const Patients = () => {
       ) : (
         <ThemeProvider theme={getMuiTheme()}>
           <MUIDataTable
-            title={'Patients'}
+            title={"Patients"}
             data={data}
             columns={columns}
             options={options}
