@@ -92,7 +92,7 @@ function Home() {
         </div>
         <div className="card">
           <p className="title">Average Blood Pressure</p>
-          <h1>{(cardsData.averageBloodPressure ?? 0).toFixed(2)}</h1>
+          <h1>{(cardsData.averageBloodPressure ?? 0).toFixed(2)} bpm</h1>
         </div>
         <div className="card">
           <p className="title">Average Weight</p>

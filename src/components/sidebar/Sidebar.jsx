@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import { RxDashboard } from 'react-icons/rx';
-import { LiaClipboardListSolid } from 'react-icons/lia';
-import { TbLogout } from 'react-icons/tb';
-import { BsPeopleFill } from 'react-icons/bs';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { RxDashboard } from "react-icons/rx";
+import { LiaClipboardListSolid } from "react-icons/lia";
+import { TbLogout } from "react-icons/tb";
+import { BsPeopleFill } from "react-icons/bs";
+import { useLocation, useNavigate } from "react-router-dom";
+import { name } from "../constant";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   const location = useLocation();
   const [tab, setTab] = useState(location.pathname);
   const navigate = useNavigate();
 
-  const handleLogout = () =>{
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('role');
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
 
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
     <aside
       id="sidebar"
-      className={openSidebarToggle ? 'sidebar-responsive' : ''}
+      className={openSidebarToggle ? "sidebar-responsive" : ""}
     >
       <div className="sidebar-title">
-        <div className="sidebar-brand ">VSR Robot</div>
+        <div className="sidebar-brand ">{name}</div>
         <span className="icon close_icon" onClick={OpenSidebar}>
           X
         </span>
@@ -33,7 +34,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
       <ul className="sidebar-list">
         <li
           className={`sidebar-list-item ${
-            tab === '/dashboard/home' ? 'active' : ''
+            tab === "/dashboard/home" ? "active" : ""
           }`}
         >
           <a href="/dashboard/home">
@@ -42,7 +43,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         </li>
         <li
           className={`sidebar-list-item ${
-            tab === '/dashboard/records' ? 'active' : ''
+            tab === "/dashboard/records" ? "active" : ""
           }`}
         >
           <a href="/dashboard/records">
@@ -51,7 +52,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         </li>
         <li
           className={`sidebar-list-item ${
-            tab === '/dashboard/patients' ? 'active' : ''
+            tab === "/dashboard/patients" ? "active" : ""
           }`}
         >
           <a href="/dashboard/patients">
