@@ -87,6 +87,11 @@ const Login = () => {
           </div>
           <div>
             <img src="./undp.png" alt="undp" className="partener-img" />
+            <img
+              src="./innovahypers.jpg"
+              alt="innovahypers"
+              className="partener-img"
+            />
           </div>
         </form>
       </div>
