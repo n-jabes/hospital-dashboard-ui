@@ -7,6 +7,19 @@
   position: relative;
 }
 
+.formParentContainer {
+  background: rgba(10, 10, 10, 0.452);
+  height: 100%;
+  width: 95%;
+  z-index: 10;
+  padding: 20px;
+  overflow-y: auto;
+  padding-bottom: 5%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .patientFormContainer {
   width: 60%;
   height: 100%;
@@ -15,8 +28,8 @@
   position: absolute;
   z-index: 5;
   border-radius: 10px;
-  box-shadow: 4px 8px 8px aliceblue;
-  background: rgb(84, 90, 95);
+  /* box-shadow: 0px 4px 6px aliceblue; */
+  background: rgb(255, 255, 255);
   border: 1px solid aliceblue;
   border-radius: 10px;
   padding: 15px;
@@ -27,12 +40,12 @@
 }
 
 .patientFormContainer .title {
-  color: aliceblue;
+  color: #324da6;
 }
 .patientFormContainer .close {
   font-weight: 600;
   font-size: 18px;
-  color: rgb(201, 22, 46);
+  color: rgb(253, 47, 74);
   position: absolute;
   top: 20px;
   right: 20px;
@@ -40,15 +53,15 @@
   padding: 5px 10px;
   border: none;
   cursor: pointer;
-  border: 1px solid aliceblue;
+  border: 1px solid rgb(253, 47, 74);
   background: white;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  color: aliceblue;
-  /* color: #80889c; */
+  /* color: aliceblue; */
+  color: #80889c;
 }
 
 form .item {
