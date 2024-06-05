@@ -85,9 +85,13 @@ body {
 }
 
 .sidebar-brand {
-  margin-top: 15px;
+  text-align: center;
+  width: 100%;
+  margin-top: 45px;
   font-size: 20px;
   font-weight: 700;
+  color: #324da6;
+  margin-bottom: 10px;
 }
 
 .sidebar-list {
@@ -101,7 +105,7 @@ body {
 }
 
 .sidebar-list-item {
-  font-size: 18px;
+  font-size: 15px;
   width: 70%;
   border-radius: 20px;
   padding: 10px 20px;
@@ -170,8 +174,9 @@ body {
 }
 
 .card .title {
-  color: #80889c;
-  font-size: 16px;
+  color: #929aaf;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .card h1 {
