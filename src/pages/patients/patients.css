@@ -135,7 +135,7 @@ form button {
   .patientFormContainer {
     width: 85%;
     height: 100%;
-    margin-left: 1%;
+    margin-left: 0.4%;
     height: max-content;
     position: absolute;
     z-index: 5;
