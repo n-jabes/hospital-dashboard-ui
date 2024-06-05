@@ -6,7 +6,7 @@
   cursor: pointer;
   text-align: center;
   border: none;
-  width: 100%;
+  width: max-content;
   font-size: 13px;
   font-family: 'Poppins', sans-serif;
 }

@@ -9,6 +9,8 @@ body {
   /* color: #9e9ea4; */
   overflow: hidden;
   font-family: 'Poppins', 'Roboto', sans-serif;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
 .icon {
@@ -43,6 +45,21 @@ body {
     'sidebar header header header'
     'sidebar main main main';
   height: 100vh;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #69777e;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track{
+  background: #edeeee;
+  border-radius: 5px;
 }
 
 /* Header  */
