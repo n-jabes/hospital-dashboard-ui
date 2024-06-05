@@ -148,7 +148,7 @@ body {
 
 /* End Sidebar  */
 
-/* Main  */
+/* Main */
 .main-container {
   grid-area: main;
   overflow-y: auto;
