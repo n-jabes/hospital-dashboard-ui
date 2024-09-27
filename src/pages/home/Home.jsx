@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // import {
 //   LineChart,
 //   Line,
@@ -11,9 +11,9 @@ import axios from 'axios';
 //   ResponsiveContainer,
 // } from 'recharts';
 
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from "@mui/x-charts/LineChart";
 
-const baseURL = 'https://innovahyperbackend.onrender.com';
+const baseURL = "https://innovahyperbackend.onrender.com";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ function Home() {
     averageWeight: 0,
     averageTemperature: 0,
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [chartPatients, setChartPatients] = useState([]);
   const [chartHours, setChartHours] = useState([]);
 
@@ -35,7 +35,7 @@ function Home() {
           `${baseURL}/medicalRecords/total-patients-by-hour`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -51,15 +51,15 @@ function Home() {
         setChartHours(chartData.map((item) => item.hours));
         setChartPatients(chartData.map((item) => item.patients));
 
-        console.log('uData:', chartHours);
-        console.log('pData:', chartPatients);
+        console.log("uData:", chartHours);
+        console.log("pData:", chartPatients);
 
         // Fetch data for the cards
         const cardsResponse = await axios.get(
           `${baseURL}/medicalRecords/average-medical-data`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -76,7 +76,7 @@ function Home() {
           averageTemperature,
         });
       } catch (error) {
-        console.log('Failed to fetch data');
+        console.log("Failed to fetch data");
       }
     };
 
@@ -91,7 +91,7 @@ function Home() {
           <h1>{cardsData.screenedPeople}</h1>
         </div>
         <div className="card">
-          <p className="title">Average Blood Pressure</p>
+          <p className="title">Average Purse Rate</p>
           <h1>{(cardsData.averageBloodPressure ?? 0).toFixed(2)} bpm</h1>
         </div>
         <div className="card">
@@ -101,7 +101,8 @@ function Home() {
         <div className="card">
           <p className="title">Average Temperature</p>
           <h1>
-          {(cardsData.averageTemperature ?? 0).toFixed(2)}<sup>o</sup>C
+            {(cardsData.averageTemperature ?? 0).toFixed(2)}
+            <sup>o</sup>C
           </h1>
         </div>
       </div>
@@ -139,10 +140,10 @@ function Home() {
             width={950}
             height={300}
             series={[
-              { data: chartPatients, label: 'patients' },
-              { data: chartHours, label: 'hours' },
+              { data: chartPatients, label: "patients" },
+              { data: chartHours, label: "hours" },
             ]}
-            xAxis={[{ scaleType: 'point', data: chartHours }]}
+            xAxis={[{ scaleType: "point", data: chartHours }]}
           />
         </div>
       </div>

@@ -1,1 +1,1 @@
-export const name = "VSR Robot";
+export const name = "BAHO Nursebot";
