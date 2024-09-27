@@ -35,16 +35,16 @@ const Records = () => {
   }, []);
 
   const columns = [
-    '#',
-    'Names',
-    'Email',
-    'Card No.',
-    'Temperature',
-    'Weight',
-    'Height',
-    'Heart Beat',
-    'Oxygen Level',
-    'Action',
+    "#",
+    "Names",
+    "Email",
+    "Card No.",
+    "Temperature",
+    "Weight",
+    "Height",
+    "Purse Rate",
+    "Oxygen Level",
+    "Action",
   ];
 
   console.log(medicalRecords);
