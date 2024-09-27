@@ -128,58 +128,61 @@ const Patients = () => {
   return (
     <div className="patients">
       {showForm && (
-        <div className="patientFormContainer">
-          <button className="close" onClick={() => setShowForm(!showForm)}>
-            x
-          </button>
-          <h1 className="title">New Patient</h1>
-          <form action="#" onSubmit={handleCreateNewUser}>
-            <div className="item">
-              <label htmlFor="fullName">Name</label>
-              <input
-                type="text"
-                placeholder="Enter patient Full Names"
-                name="fullName"
-                onChange={handleFullNameChange}
-                required
-              />
-            </div>
+        <div className="formParentContainer">
+          <div className="patientFormContainer">
+            <button className="close" onClick={() => setShowForm(!showForm)}>
+              x
+            </button>
+            <h1 className="title">New Patient</h1>
+            <form action="#" onSubmit={handleCreateNewUser}>
+              <div className="item">
+                <label htmlFor="fullName">Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter patient Full Names"
+                  name="fullName"
+                  onChange={handleFullNameChange}
+                  required
+                />
+              </div>
 
-            <div className="item">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter patient Email"
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
+              <div className="item">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter patient Email"
+                  onChange={handleEmailChange}
+                  required
+                />
+              </div>
 
-            <div className="item">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter patient Password"
-                onChange={handlePasswordChange}
-                required
-              />
-            </div>
+              <div className="item">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter patient Password"
+                  onChange={handlePasswordChange}
+                  required
+                />
+              </div>
 
-            <div className="item">
-              <label htmlFor="cardId">Card Id</label>
-              <input
-                type="text"
-                name="cardId"
-                placeholder="Enter patient Card Id"
-                onChange={handleCardIdChange}
-                required
-              />
-            </div>
-            <button type="submit">Submit</button>
-          </form>
+              <div className="item">
+                <label htmlFor="cardId">Card Id</label>
+                <input
+                  type="text"
+                  name="cardId"
+                  placeholder="Enter patient Card Id"
+                  onChange={handleCardIdChange}
+                  required
+                />
+              </div>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
+        
       )}
       <div className="addPatientButton">
         <button className="addUserBtn" onClick={() => setShowForm(!showForm)}>

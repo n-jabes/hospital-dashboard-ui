@@ -7,17 +7,32 @@
   position: relative;
 }
 
+.formParentContainer {
+  background: rgba(10, 10, 10, 0.452);
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  top: 0;
+  left: 0;
+}
+
 .patientFormContainer {
-  width: 60%;
+  width: 50%;
   height: 100%;
   margin-left: 15%;
   height: max-content;
   position: absolute;
   z-index: 5;
-  background: white;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  background: white;
+  /* box-shadow: 0px 4px 6px aliceblue; */
+  background: rgb(255, 255, 255);
+  border: 1px solid aliceblue;
   border-radius: 10px;
   padding: 15px;
   display: flex;
@@ -26,23 +41,28 @@
   gap: 20px;
 }
 
+.patientFormContainer .title {
+  color: #324da6;
+}
 .patientFormContainer .close {
   font-weight: 600;
-  font-size: 20px;
-  color: #929aaf;
+  font-size: 18px;
+  color: rgb(253, 47, 74);
   position: absolute;
   top: 20px;
   right: 20px;
-  border-radius: 50%;
+  border-radius: 5px;
+  padding: 5px 10px;
   border: none;
-  width: 35px;
-  height: 35px;
   cursor: pointer;
+  border: 1px solid rgb(253, 47, 74);
+  background: white;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  /* color: aliceblue; */
   color: #80889c;
 }
 
@@ -70,6 +90,8 @@ form button {
   color: white;
   font-weight: 600;
   cursor: pointer;
+  border: 1px solid aliceblue;
+  font-family: poppins;
 }
 
 .addPatientButton {
@@ -97,4 +119,25 @@ form button {
   padding: 20px;
   font-size: 16px;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .formParentContainer {
+    height: 90%;
+    width: 94%;
+    padding: 10px;
+  }
+
+  .patientFormContainer {
+    width: 85%;
+    height: 100%;
+    margin-left: 0.4%;
+    height: max-content;
+    position: absolute;
+    z-index: 5;
+    border: 1px solid aliceblue;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 20px;
+  }
 }
