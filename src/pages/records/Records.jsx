@@ -42,7 +42,7 @@ const Records = () => {
     "Temperature",
     "Weight",
     "Height",
-    "Heart Beat",
+    "Purse Rate",
     "Oxygen Level",
     "Action",
   ];
